@@ -107,9 +107,10 @@ hd.jql = {
 		if(e==null) return;
 		var parent = this instanceof NodeList?this[0]:this instanceof Array?this[0].parentNode:this,
 		ele;
-			
-		if(typeof e.style !== 'undefined'){
-			ele = e;
+		if(typeof e ==='string'){
+			ele = $(e);
+		}else{
+			ele = typeof e.style !== 'undefined'?e:null;
 		}
 		
 		if(ele==null) return;
@@ -127,6 +128,7 @@ hd.jql = {
 		}else{
 			parent.appendChild(ele);
 		}
+		ele = parent = null;
 	},
 	childs:function(idx){
 		// get child element of an element
