@@ -4,7 +4,6 @@ CodeName: HDjs(Hackindo Javascript Framework)
 version: Alpha
 Contributor: Muhammad Farid Wajdi
 website: www.hackindo.com
-holla world
 */
 (function(){  
 window.hd={
@@ -116,14 +115,14 @@ hd.jql = {
 		if(ele==null) return;
 		
 		index = index === 0?'first':index >= parent.childs().length?'end':index;
-		
 		if(typeof index ==='string'){
-			if(index.match(/first/i)){
+			if(index=='first'){
 				parent.insertBefore(ele, parent.childs(0));
 			}else{
 				parent.appendChild(ele);
 			}
 		}else if(typeof index ==='number'){
+			index = parent.contains(ele)?parent.childs(index+1)===ele?index:(index+1):index;
 			parent.insertBefore(ele, parent.childs(index));
 		}else{
 			parent.appendChild(ele);
@@ -461,4 +460,3 @@ for(var i in hd.fn){
 	window[rootHd][i] = hd.fn[i]
 }
 })();
-
