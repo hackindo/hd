@@ -4,6 +4,7 @@ CodeName: HDjs(Hackindo Javascript Framework)
 version: Alpha
 Contributor: Muhammad Farid Wajdi
 website: www.hackindo.com
+test
 */
 (function(){  
 window.hd={
