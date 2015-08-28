@@ -16,6 +16,7 @@ hd.data = {};
 // regular expressions 
 hd.data={
 	regex:{
+		urlVar:'(\\?|&)([a-z0-9]+=(.[^\\s&]*)?)(?=&?)',
 		cssStyles:'([a-z]|-)*:.[^;\\n]*;?',// css property and value(eg background-color:#44444 etc)
 		cssRule:'((-|:|\\.|#)*?\\w)*{(.|\\n)[^\\}]*}', // css rule (eg div#ele{color:red;font-size:20px})
 		cssUnit:'(em|ex|%|px|cm|mm|in|pt|pc)', // css unit (eg 3px or 2em or 100%)
@@ -333,6 +334,14 @@ hd.fn = {
 			}
 			return ret;
 		},
+		clone:function(obj) {
+		    if (obj == null||typeof obj !=='object') return null;
+		    var c = {};
+		    for (var a in obj) {
+		        if (obj.hasOwnProperty(a)) c[a] = obj[a];
+		    }
+		    return c;
+		},
 		toArray:function(obj,both){
 			if(typeof obj!=='object') return [];
 			both = typeof both ==='boolean'?both:false;
@@ -348,6 +357,18 @@ hd.fn = {
 // check compabilities of the browser(collecting data)
 var _checker = function(){
 	var supports = hd.supports = {};
+	// getting url variables and store them
+	var params = window.location.href.match(new RegExp(hd.data.regex.urlVar,'gi')),
+	vars = null;
+	if(params){
+		for(var i=0;i<params.length;i++){
+			var param = params[i].replace(/&|\?/gi,'').split('=');
+			if(vars ==null)vars={};
+			vars[param[0]] = decodeURIComponent(param[1]);
+		}
+	}
+	supports.urlVars = vars;
+	// is css 3 supported by current browser
 	supports.css3 = ('text-shadow' in document.documentElement.style);
 	supports.doctype=document.doctype == null?null:{
 		name: document.doctype.name,
