@@ -4,7 +4,7 @@ CodeName: HDjs(Hackindo Javascript Framework)
 version: Alpha
 Contributor: Muhammad Farid Wajdi
 website: www.hackindo.com
-test
+holla world
 */
 (function(){  
 window.hd={
@@ -461,3 +461,4 @@ for(var i in hd.fn){
 	window[rootHd][i] = hd.fn[i]
 }
 })();
+
